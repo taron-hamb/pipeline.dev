@@ -6,90 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+	<link href="{!! asset('/css/app.css') !!}" rel="stylesheet">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="{!! asset("/js/jquery-2.1.4.min.js") !!}"></script>
+	<script src="{!! asset("/js/main.js") !!}"></script>
 	<meta name="csrf_token" content="{{ csrf_token() }}" />
 	<script>
-		$(document).ready(function(){
 
-			$("#login").click(function(event){
-				event.preventDefault();
-				var email = $('input[id="email"]').val();
-				var password = $('input[id="password"]').val();
-				var data = null;
-				$.ajax({
-					type: 'POST',
-					url: "https://api.pipedrive.com/v1/authorizations?api_token=bc176df1022909573150c3f54fd522e0baf5c363",
-					data:{
-						email: email,
-						password: password
-					},
-					success: function(result){
-						data = result.additional_data.user.profile;
-					},
-					error: function(error){
-						console.log(error);
-					},
-					async: false
-				});
-				if(data != null){
-					var login = null;
-					$.ajax({
-						url: '/login',
-						type: 'POST',
-						beforeSend: function (xhr) {
-							var token = $('meta[name="csrf_token"]').attr('content');
-
-							if (token) {
-								return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-							}
-						},
-						data: {
-							email: data.email,
-							name: data.name
-						},
-						success: function (result) {
-							login = result;
-						},
-						error: function (error) {
-							login = error;
-						},
-						async: false
-					});
-
-					console.log(login);
-					if(login == 'success'){
-						window.location.href = '/';
-					}
-				}else{
-					console.log(data);
-				}
-//
-//				console.log(data);
-			});
-
-
-//			$("#register").click(function(){
-//				var name = $(input[type='name']).val();
-//				var email = $(input[type='email']).val();
-//				var active_flag = $(input[type='active_flag']).val();
-//				$.ajax({
-//					type: 'POST',
-//					url: "https://api.pipedrive.com/v1/users?api_token=bc176df1022909573150c3f54fd522e0baf5c363",
-//					data:{name:name,email:email,active_flag:active_flag},
-//					success: function(result){
-//						console.log(result);
-//						console.log(result.status)
-//					},
-//					error:function(result){
-//						console.log(result);
-//					}
-//				});
-//			});
-		});
 
 	</script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

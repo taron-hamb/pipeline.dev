@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Auth;
 use App\Repositories\UserRepository;
+use App\User;
 
 class UserController extends Controller {
 
@@ -20,13 +21,12 @@ class UserController extends Controller {
 
 	}
 
-	public function login(UserRepository $users)
+	public function login(User $users)
 	{
 		$data = Input::all();
 
 		$user = $users->findByUsernameOrCreate($data);
 
-//		dd($user);
 		Auth::login($user);
 //
 		echo "success";

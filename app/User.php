@@ -32,4 +32,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['password', 'remember_token'];
 
 
+	public function findByUsernameOrCreate($userData)
+	{
+		return User::firstOrCreate([
+			'name' => $userData['name'],
+			'email' => $userData['email'],
+		]);
+	}
+
 }
