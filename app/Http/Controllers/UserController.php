@@ -28,10 +28,8 @@ class UserController extends Controller {
 		$user = $users->findByUsernameOrCreate($data);
 
 		Auth::login($user);
-//
+
 		echo "success";
-//		return redirect('/levon');
-//die;
 	}
 	public function authenticate()
 	{

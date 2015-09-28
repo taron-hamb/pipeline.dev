@@ -13,10 +13,7 @@
 	<script src="{!! asset("/js/jquery-2.1.4.min.js") !!}"></script>
 	<script src="{!! asset("/js/main.js") !!}"></script>
 	<meta name="csrf_token" content="{{ csrf_token() }}" />
-	<script>
 
-
-	</script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>

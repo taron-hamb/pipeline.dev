@@ -26,7 +26,7 @@ $(document).ready(function(){
                 url: '/login',
                 type: 'POST',
                 beforeSend: function (xhr) {
-                    var token = $('meta[name="csrf_token"]').attr('content');
+                    var token = $('input[name="_token"]').val();
 
                     if (token) {
                         return xhr.setRequestHeader('X-CSRF-TOKEN', token);
@@ -44,7 +44,6 @@ $(document).ready(function(){
                 },
                 async: false
             });
-            //console.log(login);
             if(login == 'success'){
                 window.location.href = '/';
             }else{
@@ -61,21 +60,4 @@ $(document).ready(function(){
         }
     });
 
-//			$("#register").click(function(){
-//				var name = $(input[type='name']).val();
-//				var email = $(input[type='email']).val();
-//				var active_flag = $(input[type='active_flag']).val();
-//				$.ajax({
-//					type: 'POST',
-//					url: "https://api.pipedrive.com/v1/users?api_token=bc176df1022909573150c3f54fd522e0baf5c363",
-//					data:{name:name,email:email,active_flag:active_flag},
-//					success: function(result){
-//						console.log(result);
-//						console.log(result.status)
-//					},
-//					error:function(result){
-//						console.log(result);
-//					}
-//				});
-//			});
 });

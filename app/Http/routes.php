@@ -1,9 +1,7 @@
 <?php
 
-
 get('/', 'WelcomeController@index');
 post('/login', 'UserController@login');
-
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
