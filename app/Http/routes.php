@@ -7,10 +7,9 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
-get('/home', 'HomeController@index');
+
 
 Route::group(['middleware' => 'auth'], function() {
-
-//	get('/', 'UserController@index');
-
+	get('/', 'HomeController@index');
+//	get('/home', 'HomeController@index');
 });

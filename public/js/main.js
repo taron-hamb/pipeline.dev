@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
-    $("#login").click(function(event){
-        event.preventDefault();
+    //Login
+    $("#login").click(function(e){
+        e.preventDefault();
         var email = $('input[id="email"]').val();
         var password = $('input[id="password"]').val();
         var data = null;
@@ -33,6 +34,7 @@ $(document).ready(function(){
                     }
                 },
                 data: {
+                    pipedrive_id: data.id,
                     email: data.email,
                     name: data.name
                 },
@@ -50,7 +52,7 @@ $(document).ready(function(){
                 window.location.href = '/';
             }
         }else{
-            console.log(data);
+            window.location.href = '/';
         }
     });
 
@@ -59,5 +61,7 @@ $(document).ready(function(){
             $("#login").click();
         }
     });
+
+    //Get deals
 
 });
