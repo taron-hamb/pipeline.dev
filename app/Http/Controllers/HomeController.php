@@ -30,7 +30,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		$api_token = "bc176df1022909573150c3f54fd522e0baf5c363";
+		$api_token = config('constants.api_token');
 		function curl($url)
 		{
 			$ch = curl_init();

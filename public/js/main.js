@@ -8,7 +8,7 @@ $(document).ready(function(){
         var data = null;
         $.ajax({
             type: 'POST',
-            url: "https://api.pipedrive.com/v1/authorizations?api_token=bc176df1022909573150c3f54fd522e0baf5c363",
+            url: "https://api.pipedrive.com/v1/authorizations?api_token=".config('constants.api_token'),
             data:{
                 email: email,
                 password: password
@@ -61,7 +61,5 @@ $(document).ready(function(){
             $("#login").click();
         }
     });
-
-    //Get deals
 
 });
