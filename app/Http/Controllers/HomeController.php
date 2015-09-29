@@ -63,7 +63,7 @@ class HomeController extends Controller {
 		$url_deals = "https://api.pipedrive.com/v1/pipelines/".$selectedPipeline['id']."/deals?everyone=0&start=0&api_token=".$api_token;
 		$dealsWithData = curl($url_deals);
 		$deals = $dealsWithData['data'];
-
+//		dd($deals);
 		return view('dashboard', compact('selectedPipeline', 'stages', 'deals'));
 	}
 

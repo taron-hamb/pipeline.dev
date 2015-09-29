@@ -1,0 +1,15 @@
+table p{
+    border: 1px solid #dddddd;
+    padding: 13px;
+    margin: 0;
+}
+table td{
+    padding: 0 !important;
+}
+table td p:first-child{
+    font-weight: bold;
+}
+table td p small{
+    color: #888e94;
+    display: block
+}

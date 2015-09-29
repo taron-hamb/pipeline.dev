@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    var api_token = "bc176df1022909573150c3f54fd522e0baf5c363";
+
     //Login
     $("#login").click(function(e){
         e.preventDefault();
@@ -8,7 +10,7 @@ $(document).ready(function(){
         var data = null;
         $.ajax({
             type: 'POST',
-            url: "https://api.pipedrive.com/v1/authorizations?api_token=".config('constants.api_token'),
+            url: "https://api.pipedrive.com/v1/authorizations?api_token="+api_token,
             data:{
                 email: email,
                 password: password
