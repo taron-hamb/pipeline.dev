@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Auth;
-use App\Repositories\UserRepository;
 use App\User;
 
 class UserController extends Controller {
@@ -21,19 +20,17 @@ class UserController extends Controller {
 
 	}
 
-	public function login(User $users)
+	/**
+	 * @param User $users
+	 */
+	public function authenticate(User $users)
 	{
 		$data = Input::all();
 
 		$user = $users->findByUsernameOrCreate($data);
-
 		Auth::login($user);
 
 		echo "success";
-	}
-	public function authenticate()
-	{
-
 	}
 
 	/**

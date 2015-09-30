@@ -19,7 +19,10 @@
                                                 @if($deal['stage_id'] == $stage['id'])
                                                     <p>
                                                         {!! $deal['title'] !!}
-                                                        <small>{!! $deal['formatted_value'] !!}</small>
+                                                        <small>
+                                                            <span>{!! $deal['formatted_value'] !!}</span>
+                                                            <span>{!! $deal['org_name'] !!}</span>
+                                                        </small>
                                                     </p>
                                                 @endif
                                             @endforeach

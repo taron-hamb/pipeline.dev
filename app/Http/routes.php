@@ -1,15 +1,18 @@
 <?php
 
 get('/', 'WelcomeController@index');
-post('/login', 'UserController@login');
+
+post('/authenticate', 'UserController@authenticate');
+
+get('/auth/register', function(){
+	return redirect('/');
+});
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
 
-
 Route::group(['middleware' => 'auth'], function() {
-	get('/', 'HomeController@index');
-//	get('/home', 'HomeController@index');
+	get('/dashboard',  'HomeController@index');
 });

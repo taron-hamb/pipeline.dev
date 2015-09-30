@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
-    var api_token = "bc176df1022909573150c3f54fd522e0baf5c363";
+    var api_token = $('meta[id="api_token"]').attr('content');
+    var api_url = $('meta[id="api_url"]').attr('content');
 
     //Login
     $("#login").click(function(e){
@@ -10,7 +11,7 @@ $(document).ready(function(){
         var data = null;
         $.ajax({
             type: 'POST',
-            url: "https://api.pipedrive.com/v1/authorizations?api_token="+api_token,
+            url: api_url+"/authorizations?api_token="+api_token,
             data:{
                 email: email,
                 password: password
@@ -26,11 +27,10 @@ $(document).ready(function(){
         if(data != null){
             var login = null;
             $.ajax({
-                url: '/login',
+                url: '/authenticate',
                 type: 'POST',
                 beforeSend: function (xhr) {
                     var token = $('input[name="_token"]').val();
-
                     if (token) {
                         return xhr.setRequestHeader('X-CSRF-TOKEN', token);
                     }
@@ -54,7 +54,7 @@ $(document).ready(function(){
                 window.location.href = '/';
             }
         }else{
-            window.location.href = '/';
+            $('#errors').css({ "display": "block"})
         }
     });
 
