@@ -38,9 +38,12 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				@if(Auth::check())
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Home</a></li>
+					<li><a href="{{ url('/desk-performance') }}">Desk Performance</a></li>
 				</ul>
+				@endif
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
@@ -58,8 +61,13 @@
 			</div>
 		</div>
 	</nav>
-
-	@yield('content')
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				@yield('content')
+			</div>
+		</div>
+	</div>
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

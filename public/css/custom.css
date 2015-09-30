@@ -13,3 +13,6 @@ table td p small{
     color: #888e94;
     display: block
 }
+.user:hover{
+    background-color: #f5f5f5;
+}

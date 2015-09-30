@@ -19,10 +19,6 @@ class UserController extends Controller {
 	{
 
 	}
-
-	/**
-	 * @param User $users
-	 */
 	public function authenticate(User $users)
 	{
 		$data = Input::all();

@@ -32,6 +32,7 @@ class HomeController extends Controller {
 	{
 		$api_token = config('constants.api_token');
 		$api_url = config('constants.api_url');
+
 		function curl($url)
 		{
 			$ch = curl_init();
@@ -69,6 +70,110 @@ class HomeController extends Controller {
 		$deals = $dealsWithData['data'];
 
 		return view('dashboard', compact('selectedPipeline', 'stages', 'deals'));
+	}
+
+	public function deskPerformance()
+	{
+		$api_token = config('constants.api_token');
+		$api_url = config('constants.api_url');
+
+		function curl($url)
+		{
+			$ch = curl_init();
+
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_URL,$url);
+			$data = curl_exec($ch);
+
+			curl_close($ch);
+
+			return json_decode($data, true);
+		}
+
+		//Get Users
+		$url_users = $api_url."/users?&api_token=".$api_token;
+		$usersWithData = curl($url_users);
+		$users = $usersWithData['data'];
+
+		//Get Pipelines
+		$url_pipelines = $api_url."/pipelines?api_token=".$api_token;
+		$pipelines = curl($url_pipelines);
+
+		//Get Selected Pipeline
+		foreach($pipelines['data'] as $item){
+			if($item['selected'] == 'true'){
+				$selectedPipeline = $item;
+				break;
+			}
+		}
+
+		//Get Deals
+		$url_deals = $api_url."/pipelines/".$selectedPipeline['id']."/deals?everyone=0&start=0&api_token=".$api_token;
+		$dealsWithData = curl($url_deals);
+		$deals = $dealsWithData['data'];
+
+		return view('desk-performance', compact('users', 'deals'));
+
+	}
+
+	public function userDesk($id)
+	{
+		$api_token = config('constants.api_token');
+		$api_url = config('constants.api_url');
+
+		function curl($url)
+		{
+			$ch = curl_init();
+
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_URL,$url);
+			$data = curl_exec($ch);
+
+			curl_close($ch);
+
+			return json_decode($data, true);
+		}
+
+		//Get Users
+		$url_users = $api_url."/users?&api_token=".$api_token;
+		$usersWithData = curl($url_users);
+		$users = $usersWithData['data'];
+
+		//Get Pipelines
+		$url_pipelines = $api_url."/pipelines?api_token=".$api_token;
+		$pipelines = curl($url_pipelines);
+
+		//Get Selected Pipeline
+		foreach($pipelines['data'] as $item){
+			if($item['selected'] == 'true'){
+				$selectedPipeline = $item;
+				break;
+			}
+		}
+
+		//Get Stages
+		$url_stage = $api_url."/stages?pipeline_id=".$selectedPipeline['id']."&api_token=".$api_token;
+		$stagesWithData = curl($url_stage);
+		$stages = $stagesWithData['data'];
+
+		//Get Deals
+		$url_deals = $api_url."/pipelines/".$selectedPipeline['id']."/deals?everyone=0&start=0&api_token=".$api_token;
+		$allDealsWithData = curl($url_deals);
+		$deals = $allDealsWithData['data'];
+
+		$userDeals = array();
+
+		foreach($deals as $deal)
+		{
+			if($deal['user_id'] == $id)
+			{
+				$userDeals[] = $deal;
+			}
+		}
+
+		return view('user-desk', compact('users', 'selectedPipeline', 'stages', 'deals', 'userDeals'));
 	}
 
 }
