@@ -3,12 +3,14 @@
 @section('content')
 
     <div class="panel panel-default">
-        <div class="panel-heading"></div>
+        <div class="panel-heading">
+            {!! $selectedPipeline['name'] !!}
+        </div>
         <div class="panel-body">
             <table class="table">
                 <tr>
                     @foreach($users as $user)
-                        <td class="user">
+                        <td class="user {!! ($user['id'] == $user_id) ? 'selected_user' : '' !!}">
                             <a href="/user-desk/{!! $user['id'] !!}">
                                 <p>
                                     {!! $user['name'] !!}

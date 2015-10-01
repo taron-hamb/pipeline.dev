@@ -24,6 +24,8 @@ class UserController extends Controller {
 		$data = Input::all();
 
 		$user = $users->findByUsernameOrCreate($data);
+
+
 		Auth::login($user);
 
 		echo "success";

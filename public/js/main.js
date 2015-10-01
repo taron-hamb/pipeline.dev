@@ -9,6 +9,8 @@ $(document).ready(function(){
         var email = $('input[id="email"]').val();
         var password = $('input[id="password"]').val();
         var data = null;
+
+
         $.ajax({
             type: 'POST',
             url: api_url+"/authorizations?api_token="+api_token,
@@ -49,7 +51,7 @@ $(document).ready(function(){
                 async: false
             });
             if(login == 'success'){
-                window.location.href = '/';
+                window.location.href = '/dashboard';
             }else{
                 window.location.href = '/';
             }
