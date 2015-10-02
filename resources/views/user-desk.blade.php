@@ -11,7 +11,7 @@
                 <tr>
                     @foreach($users as $user)
                         <td class="user {!! ($user['id'] == $user_id) ? 'selected_user' : '' !!}">
-                            <a href="/user-desk/{!! $user['id'] !!}">
+                            <a href="/user-desk/{!! $user['id'] !!}" class="process">
                                 <p>
                                     {!! $user['name'] !!}
                                     <?php $dealsCount = 0 ?>

@@ -8,16 +8,15 @@
 
 	<link href="{!! asset('/css/app.css') !!}" rel="stylesheet">
 	<link href="{!! asset('/css/custom.css') !!}" rel="stylesheet">
+	<link href="{!! asset('/css/nprogress.css') !!}" rel="stylesheet" />
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-	<script src="{!! asset("/js/jquery-2.1.4.min.js") !!}"></script>
-	<script src="{!! asset("/js/main.js") !!}"></script>
+
+
 	<meta content="{!! config('constants.api_token') !!}" id="api_token" />
 	<meta content="{!! config('constants.api_url') !!}" id="api_url" />
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -39,10 +38,10 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				@if(Auth::check())
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Home</a></li>
-					<li><a href="{{ url('/desk-performance') }}">Desk Performance</a></li>
-				</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="{{ url('/') }}" class="process">Home</a></li>
+						<li><a href="{{ url('/desk-performance') }}" class="process">Desk Performance</a></li>
+					</ul>
 				@endif
 
 				<ul class="nav navbar-nav navbar-right">
@@ -53,7 +52,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+								<li><a href="{{ url('/auth/logout') }}" class="process">Logout</a></li>
 							</ul>
 						</li>
 					@endif
@@ -61,6 +60,7 @@
 			</div>
 		</div>
 	</nav>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -70,7 +70,10 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	{{--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--}}
+	<script src="{!! asset("/js/jquery-2.1.4.min.js") !!}"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="{!! asset('/js/nprogress.js') !!}"></script>
+	<script src="{!! asset("/js/main.js") !!}"></script>
 </body>
 </html>

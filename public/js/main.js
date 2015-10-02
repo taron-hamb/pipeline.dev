@@ -1,10 +1,18 @@
 $(document).ready(function(){
 
+    $(window).load(function(){
+        NProgress.done(true);
+    });
+
     var api_token = $('meta[id="api_token"]').attr('content');
     var api_url = $('meta[id="api_url"]').attr('content');
 
     //Login
     $("#login").click(function(e){
+
+        NProgress.start();
+        $("#nprogress .bar").css( "display", "none", "important");
+
         e.preventDefault();
         var email = $('input[id="email"]').val();
         var password = $('input[id="password"]').val();
@@ -56,7 +64,15 @@ $(document).ready(function(){
                 window.location.href = '/';
             }
         }else{
-            $('#errors').css({ "display": "block"})
+            $("#nprogress .bar").css( "display", "block", "important");
+            $("#nprogress .bar").css({ "background": "red" });
+            $("#nprogress .spinner-icon").css({ "border-top-color": "red" });
+            $("#nprogress .spinner-icon").css({ "border-left-color": "red" });
+            $("#nprogress .peg").css({ "box-shadow": "0 0 10px red, 0 0 5px red" });
+
+            NProgress.done(true);
+
+            $('#errors').css({ "display": "block"});
         }
     });
 
@@ -66,4 +82,8 @@ $(document).ready(function(){
         }
     });
 
+    $(".process").click(function(){
+        NProgress.start();
+        $("#nprogress .bar").css( "display", "none", "important");
+    });
 });
