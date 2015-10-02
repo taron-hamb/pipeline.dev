@@ -82,8 +82,28 @@ $(document).ready(function(){
         }
     });
 
-    $(".process").click(function(){
+    var loading =function(){
         NProgress.start();
         $("#nprogress .bar").css( "display", "none", "important");
+    };
+
+    $(".process").click(function(){
+        loading();
     });
+
+    //User Select
+
+    $("#userSelect").change(function(){
+        var link = this.options[this.selectedIndex].value;
+        if(link != '')
+        {
+            location.href = link;
+            loading();
+        }
+    });
+
+    //setInterval(function(){
+    //    $("#login").click();
+    //},5000);
+
 });

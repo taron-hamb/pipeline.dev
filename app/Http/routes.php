@@ -15,6 +15,5 @@ Route::controllers([
 
 Route::group(['middleware' => 'auth'], function() {
 	get('/dashboard',  'HomeController@index');
-	get('/desk-performance',  'HomeController@deskPerformance');
-	get('/user-desk/{id}',  'HomeController@userDesk');
+	get('/desk-performance/{id?}',  'HomeController@deskPerformance');
 });

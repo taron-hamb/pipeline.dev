@@ -110,7 +110,7 @@ class HomeController extends Controller {
 		return view('dashboard', compact('selectedPipeline', 'stages', 'deals'));
 	}
 
-	public function deskPerformance()
+	public function deskPerformance($user_id = null)
 	{
 		$users = $this->getUsers();
 
@@ -120,24 +120,17 @@ class HomeController extends Controller {
 
 		$deals = $this->getDeals($selectedPipeline);
 
-		return view('desk-performance', compact('selectedPipeline', 'users', 'deals'));
-	}
+		if($user_id)
+		{
+			$stages = $this->getStages($selectedPipeline);
 
-	public function userDesk($user_id)
-	{
-		$users = $this->getUsers();
+			$userDeals = $this->getUserDeals($user_id, $deals);
 
-		$pipelines = $this->getPipelines();
+			return view('desk-performance', compact('users', 'user_id', 'selectedPipeline', 'stages', 'deals', 'userDeals'));
 
-		$selectedPipeline = $this->getSelectedPipeline($pipelines);
-
-		$stages = $this->getStages($selectedPipeline);
-
-		$deals = $this->getDeals($selectedPipeline);
-
-		$userDeals = $this->getUserDeals($user_id, $deals);
-
-		return view('user-desk', compact('users', 'user_id', 'selectedPipeline', 'stages', 'deals', 'userDeals'));
+		}else{
+			return view('desk-performance', compact('selectedPipeline', 'users', 'deals'));
+		}
 	}
 
 }
