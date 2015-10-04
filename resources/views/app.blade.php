@@ -39,8 +39,8 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				@if(Auth::check())
 					<ul class="nav navbar-nav">
-						<li><a href="{{ url('/') }}" class="process">Home</a></li>
-						<li><a href="{{ url('/desk-performance') }}" class="process">Desk Performance</a></li>
+						<li><a href="{{ url('/') }}">Home</a></li>
+						<li><a href="{{ url('/desk-performance') }}">Desk Performance</a></li>
 					</ul>
 				@endif
 
@@ -52,7 +52,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}" class="process">Logout</a></li>
+								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 							</ul>
 						</li>
 					@endif

@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    //Window Start Loading
+    window.onbeforeunload = function () { loading(); };
+
+    //Window Loaded
     $(window).load(function(){
         NProgress.done(true);
     });
@@ -7,7 +11,7 @@ $(document).ready(function(){
     var api_token = $('meta[id="api_token"]').attr('content');
     var api_url = $('meta[id="api_url"]').attr('content');
 
-    //Login
+    //Login Click
     $("#login").click(function(e){
 
         NProgress.start();
@@ -64,46 +68,43 @@ $(document).ready(function(){
                 window.location.href = '/';
             }
         }else{
-            $("#nprogress .bar").css( "display", "block", "important");
-            $("#nprogress .bar").css({ "background": "red" });
-            $("#nprogress .spinner-icon").css({ "border-top-color": "red" });
-            $("#nprogress .spinner-icon").css({ "border-left-color": "red" });
-            $("#nprogress .peg").css({ "box-shadow": "0 0 10px red, 0 0 5px red" });
-
-            NProgress.done(true);
-
-            $('#errors').css({ "display": "block"});
+            loginError();
         }
     });
 
+    //Login key up Enter
     $("#login_form").keyup(function(event){
         if(event.keyCode == 13){
             $("#login").click();
         }
     });
 
+    //Loading
     var loading =function(){
         NProgress.start();
         $("#nprogress .bar").css( "display", "none", "important");
     };
 
-    $(".process").click(function(){
-        loading();
-    });
+    //Login Error
+    var loginError = function () {
+        $("#nprogress .bar").css( "display", "block", "important");
+        $("#nprogress .bar").css({ "background": "red" });
+        $("#nprogress .spinner-icon").css({ "border-top-color": "red" });
+        $("#nprogress .spinner-icon").css({ "border-left-color": "red" });
+        $("#nprogress .peg").css({ "box-shadow": "0 0 10px red, 0 0 5px red" });
+
+        NProgress.done(true);
+
+        $('#errors').css({ "display": "block"});
+    };
 
     //User Select
-
     $("#userSelect").change(function(){
         var link = this.options[this.selectedIndex].value;
         if(link != '')
         {
             location.href = link;
-            loading();
         }
     });
-
-    //setInterval(function(){
-    //    $("#login").click();
-    //},5000);
 
 });
