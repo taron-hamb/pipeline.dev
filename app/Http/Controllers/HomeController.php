@@ -13,6 +13,70 @@ class HomeController extends Controller {
 		$this->api_url = config('constants.api_url');
 	}
 
+	/**
+	 * Show the application dashboard to the user.
+	 *
+	 * @return Dashboard
+	 */
+	public function index()
+	{
+		$pipelines = $this->getPipelines();
+
+		$selectedPipeline = $this->getSelectedPipeline($pipelines);
+
+		$stages = $this->getStages($selectedPipeline);
+
+		$deals = $this->getDeals($selectedPipeline);
+
+		return view('dashboard', compact('selectedPipeline', 'stages', 'deals'));
+	}
+
+	/**
+	 * Show the application Desk Performance to the user.
+	 * @param null $user_id
+	 * @return desk-performance
+	 */
+	public function deskPerformance($user_id = null)
+	{
+		$users = $this->getUsers();
+
+		$pipelines = $this->getPipelines();
+
+		$selectedPipeline = $this->getSelectedPipeline($pipelines);
+
+		$deals = $this->getDeals($selectedPipeline);
+
+		if($user_id)
+		{
+			$stages = $this->getStages($selectedPipeline);
+
+			$userDeals = $this->getUserDeals($user_id, $deals);
+
+			return view('desk-performance', compact('users', 'user_id', 'selectedPipeline', 'stages', 'deals', 'userDeals'));
+
+		}else{
+			return view('desk-performance', compact('selectedPipeline', 'users', 'deals'));
+		}
+	}
+
+	/**
+	 * Show the application Details of Deal to the user.
+	 * @param $id
+	 * @return deal
+	 */
+	public function dealDetails($id)
+	{
+		$pipelines = $this->getPipelines();
+
+		$selectedPipeline = $this->getSelectedPipeline($pipelines);
+
+		$deal = $this->getDealDetails($id);
+
+		$stages = $this->getStages($selectedPipeline);
+//		dd($deal);
+		return view('dealDetails', compact('deal', 'stages'));
+	}
+
 	//cURL
 	function curl($url)
 	{
@@ -92,45 +156,13 @@ class HomeController extends Controller {
 		return $userDeals;
 	}
 
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Dashboard
-	 */
-	public function index()
+	//Get Deal Details
+	public function getDealDetails($id)
 	{
-		$pipelines = $this->getPipelines();
-
-		$selectedPipeline = $this->getSelectedPipeline($pipelines);
-
-		$stages = $this->getStages($selectedPipeline);
-
-		$deals = $this->getDeals($selectedPipeline);
-
-		return view('dashboard', compact('selectedPipeline', 'stages', 'deals'));
-	}
-
-	public function deskPerformance($user_id = null)
-	{
-		$users = $this->getUsers();
-
-		$pipelines = $this->getPipelines();
-
-		$selectedPipeline = $this->getSelectedPipeline($pipelines);
-
-		$deals = $this->getDeals($selectedPipeline);
-
-		if($user_id)
-		{
-			$stages = $this->getStages($selectedPipeline);
-
-			$userDeals = $this->getUserDeals($user_id, $deals);
-
-			return view('desk-performance', compact('users', 'user_id', 'selectedPipeline', 'stages', 'deals', 'userDeals'));
-
-		}else{
-			return view('desk-performance', compact('selectedPipeline', 'users', 'deals'));
-		}
+		$url_deal = $this->api_url."/deals/".$id."?&api_token=".$this->api_token;
+		$dealWithData = $this->curl($url_deal);
+		$deal = $dealWithData['data'];
+		return $deal;
 	}
 
 }
