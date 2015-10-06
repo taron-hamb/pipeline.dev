@@ -28,7 +28,7 @@ class HomeController extends Controller {
 
 		$deals = $this->getDeals($selectedPipeline);
 
-		return view('dashboard', compact('selectedPipeline', 'stages', 'deals'));
+		return view('auth.dashboard', compact('selectedPipeline', 'stages', 'deals'));
 	}
 
 	/**
@@ -48,14 +48,16 @@ class HomeController extends Controller {
 
 		if($user_id)
 		{
+			$selectedUser = $this->getUser($user_id);
+
 			$stages = $this->getStages($selectedPipeline);
 
 			$userDeals = $this->getUserDeals($user_id, $deals);
 
-			return view('desk-performance', compact('users', 'user_id', 'selectedPipeline', 'stages', 'deals', 'userDeals'));
+			return view('auth.desk-performance', compact('users', 'selectedUser', 'selectedPipeline', 'stages', 'deals', 'userDeals'));
 
 		}else{
-			return view('desk-performance', compact('selectedPipeline', 'users', 'deals'));
+			return view('auth.desk-performance', compact('selectedPipeline', 'users', 'deals'));
 		}
 	}
 
@@ -73,8 +75,8 @@ class HomeController extends Controller {
 		$deal = $this->getDealDetails($id);
 
 		$stages = $this->getStages($selectedPipeline);
-//		dd($deal);
-		return view('dealDetails', compact('deal', 'stages'));
+
+		return view('auth.deal-details', compact('deal', 'stages'));
 	}
 
 	//cURL
@@ -138,6 +140,15 @@ class HomeController extends Controller {
 		$usersWithData = $this->curl($url_users);
 		$users = $usersWithData['data'];
 		return $users;
+	}
+
+	//Get One User
+	public function getUser($user_id)
+	{
+		$url_user = $this->api_url."/users/".$user_id."?&api_token=".$this->api_token;
+		$userWithData = $this->curl($url_user);
+		$user = $userWithData['data'];
+		return $user;
 	}
 
 	//Get User Deals

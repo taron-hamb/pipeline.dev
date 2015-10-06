@@ -19,11 +19,15 @@ table td p small{
 .selected_user{
     background-color: #f5f5f5;
 }
+#userSelect{
+    margin-top: 20px;
+}
 #pipelines{
     width:200px;
 }
 #user-pipeline{
-    margin-top:20px;
+
+    border: 1px solid #dddddd;
 }
 
 #user-pipeline a, #dashboard-table a{
@@ -41,11 +45,26 @@ table td p small{
     padding-top: 0 !important;
 
 }
-#deal-first-row{
+.deal-first-row{
     font-weight: bold;
     font-size: 15px;
     line-height: 50px;
 }
 .glyphicon{
     padding: 0 5px 0 0;
+}
+.navbar.navbar-default{
+    background-color: #337AB7;
+}
+.title{
+    background-color: #337AB7;
+    padding: 13px;
+    color: #fff
+}
+#dashboard-table{
+    border: 1px solid #dddddd;
+}
+.row-fluid{
+    padding-left: 15px;
+    padding-right: 15px;
 }

@@ -14,7 +14,6 @@ $(document).ready(function(){
     //Login Click
     $("#login").click(function(e){
 
-        NProgress.start();
         $("#nprogress .bar").css( "display", "none", "important");
 
         e.preventDefault();
@@ -62,6 +61,7 @@ $(document).ready(function(){
                 },
                 async: false
             });
+            NProgress.start();
             if(login == 'success'){
                 window.location.href = '/dashboard';
             }else{
@@ -87,13 +87,13 @@ $(document).ready(function(){
 
     //Login Error
     var loginError = function () {
-        $("#nprogress .bar").css( "display", "block", "important");
-        $("#nprogress .bar").css({ "background": "red" });
-        $("#nprogress .spinner-icon").css({ "border-top-color": "red" });
-        $("#nprogress .spinner-icon").css({ "border-left-color": "red" });
-        $("#nprogress .peg").css({ "box-shadow": "0 0 10px red, 0 0 5px red" });
+        //$("#nprogress .bar").css( "display", "block", "important");
+        //$("#nprogress .bar").css({ "background": "red" });
+        //$("#nprogress .spinner-icon").css({ "border-top-color": "red" });
+        //$("#nprogress .spinner-icon").css({ "border-left-color": "red" });
+        //$("#nprogress .peg").css({ "box-shadow": "0 0 10px red, 0 0 5px red" });
 
-        NProgress.done(true);
+        //NProgress.done(true);
 
         $('#errors').css({ "display": "block"});
     };
